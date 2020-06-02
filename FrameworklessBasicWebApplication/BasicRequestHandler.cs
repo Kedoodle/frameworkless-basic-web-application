@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Net;
 
 namespace FrameworklessBasicWebApplication
 {
@@ -22,12 +21,13 @@ namespace FrameworklessBasicWebApplication
 
         public void WriteResponse()
         {
-            const string user = "Keddy";
+            const string user = "Keddy"; 
             var greeting = GreetingFormatter.CreateGreeting(user, DateTime.Now);
             var buffer = System.Text.Encoding.UTF8.GetBytes(greeting);
-            
+
             _context.Response.ContentLength64 = buffer.Length;
             _context.Response.OutputStream.Write(buffer, 0, buffer.Length);  // forces send of response
+            _context.Response.OutputStream.Close();
         }
     }
 }

@@ -7,10 +7,11 @@ namespace FrameworklessBasicWebApplication
     {
         public Response(HttpListenerResponse response)
         {
+            ContentLength64 = response.ContentLength64;
             OutputStream = response.OutputStream;
         }
-        
+
         public Stream OutputStream { get; }
-        public int ContentLength64 { get; set; }
+        public long ContentLength64 { get; set; }
     }
 }

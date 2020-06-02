@@ -5,6 +5,6 @@ namespace FrameworklessBasicWebApplication
     public interface IResponse
     {
         public Stream OutputStream { get; }
-        public int ContentLength64 { get; set; }
+        public long ContentLength64 { set; }
     }
 }

@@ -14,6 +14,7 @@ namespace FrameworklessBasicWebApplication
             {
                 var context = new Context(server.GetContext());  // Gets the request
                 var handler = new BasicRequestHandler(context, Console.Out);
+                
                 handler.LogRequest();
                 handler.WriteResponse();
             }

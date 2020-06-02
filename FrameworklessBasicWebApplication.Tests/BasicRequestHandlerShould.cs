@@ -30,7 +30,7 @@ namespace FrameworklessBasicWebApplication.Tests
             var mockContext = Mock.Of<IContext>(m => m.Response == mockResponse);
             var mockLogWriter = Mock.Of<TextWriter>();
             var basicRequestHandler = new BasicRequestHandler(mockContext, mockLogWriter);
-
+        
             basicRequestHandler.WriteResponse();
             
             Mock.Get(mockStream).Verify(m => m.Write(It.IsAny<byte[]>(), 0, It.IsAny<int>()), Times.Once);
