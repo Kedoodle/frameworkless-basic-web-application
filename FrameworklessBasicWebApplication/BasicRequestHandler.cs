@@ -5,18 +5,20 @@ namespace FrameworklessBasicWebApplication
 {
     public class BasicRequestHandler
     {
-        private readonly IContext _context;
         private readonly TextWriter _logWriter;
+        private readonly IRequest _request;
+        private readonly IResponse _response;
 
         public BasicRequestHandler(IContext context, TextWriter logWriter)
         {
-            _context = context;
             _logWriter = logWriter;
+            _request = context.Request;
+            _response = context.Response;
         }
         
         public void LogRequest()
         {
-            _logWriter.WriteLine($"{_context.Request.HttpMethod} {_context.Request.Url}");
+            _logWriter.WriteLine($"{_request.HttpMethod} {_request.Url}");
         }
 
         public void WriteResponse()
@@ -24,10 +26,10 @@ namespace FrameworklessBasicWebApplication
             const string user = "Keddy"; 
             var greeting = GreetingFormatter.CreateGreeting(user, DateTime.Now);
             var buffer = System.Text.Encoding.UTF8.GetBytes(greeting);
-
-            _context.Response.ContentLength64 = buffer.Length;
-            _context.Response.OutputStream.Write(buffer, 0, buffer.Length);  // forces send of response
-            _context.Response.OutputStream.Close();
+            
+            _response.ContentLength64 = buffer.Length;
+            _response.OutputStream.Write(buffer, 0, buffer.Length);
+            _response.OutputStream.Close();
         }
     }
 }

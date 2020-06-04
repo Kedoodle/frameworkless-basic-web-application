@@ -12,13 +12,13 @@ namespace FrameworklessBasicWebApplication
             server.Start();
             while (true)
             {
-                var context = new Context(server.GetContext());  // Gets the request
+                // server process request
+                var context = new Context(server.GetContext());
                 var handler = new BasicRequestHandler(context, Console.Out);
                 
                 handler.LogRequest();
                 handler.WriteResponse();
             }
-            server.Stop();  // never reached...
         }
     }
 }
